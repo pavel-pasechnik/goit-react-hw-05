@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0px 1px 5px #c5c5c5;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.active {
+  color: red;
+}

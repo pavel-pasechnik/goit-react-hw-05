@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 20px;
+  row-gap: 10px;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 10px;
+}
+
+.additional {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 10px;
+}
+
+.list {
+  list-style-type: none;
+}
+
+.list a {
+  color: inherit;
+  text-decoration: none;
+}

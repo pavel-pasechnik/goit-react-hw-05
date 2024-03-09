@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.list {
+  margin-top: 20px;
+}
+
+input {
+  height: 38px;
+  padding: 8px;
+}
+
+button {
+  padding: 8px 16px;
+}
