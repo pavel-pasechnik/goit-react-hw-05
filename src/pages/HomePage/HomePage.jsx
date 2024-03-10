@@ -6,15 +6,14 @@ import css from './HomePage.module.css';
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     async function getData() {
       try {
         const data = await fetchData('trending/movie/day?language=en-US');
         setMovies(data.results);
-      } catch (error) {
-        console.error(error); //TODO: add error handling
-      }
+      } catch (error) {}
     }
     getData();
   }, [setMovies]);
@@ -22,7 +21,7 @@ export default function HomePage() {
   return (
     <div className={css.container}>
       <h1>Trending today</h1>
-      <MovieList movies={movies} />
+      <MovieList movies={movies} state={{ from: location }} />
     </div>
   );
 }

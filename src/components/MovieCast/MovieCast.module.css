@@ -1,0 +1,13 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+img {
+  padding-top: 20px;
+}
+
+p {
+  padding-top: 20px;
+}

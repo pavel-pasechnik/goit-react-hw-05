@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import fetchData from '../../movies-api';
 import MovieList from '../../components/MovieList/MovieList';
@@ -9,6 +9,7 @@ export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
   const [params, setParams] = useSearchParams();
+  const location = useLocation();
 
   const value = params.get('query') ?? '';
 
@@ -16,18 +17,22 @@ export default function MoviesPage() {
     setQuery(value);
     async function getData() {
       try {
+        !params.size === 0 && setQuery(params.get('query'));
         const data = await fetchData(
-          `search/movie?query=${query}&include_adult=false&language=en-US&page=1`
+          `search/movie?query=${query}&include_adult=false&language=en-US`
         );
+
         setMovies(data.results);
-      } catch (error) {
-        console.error(error); //TODO: add error handling
-      }
+      } catch (error) {}
     }
     getData();
-  }, [setMovies, query]);
+  }, [setQuery, setMovies, query, params]);
 
   const handleSubmit = (values, actions) => {
+    if (values.query === '') {
+      setMovies([]);
+      return;
+    }
     setQuery(values.query);
     params.set('query', values.query);
     setParams(params);
@@ -43,7 +48,7 @@ export default function MoviesPage() {
         </Form>
       </Formik>
       <div className={css.list}>
-        <MovieList movies={movies} />
+        <MovieList movies={movies} state={{ from: location }} />
       </div>
     </div>
   );
