@@ -29,7 +29,7 @@ export default function MoviesPage() {
         );
 
         data.total_results === 0 &&
-          toast('No pictures for your request', {
+          toast('Nothing was found for your request!', {
             icon: '❗️',
           });
 
