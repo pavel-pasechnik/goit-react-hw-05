@@ -1,5 +1,6 @@
 import { Suspense, useState, useEffect, useRef } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import fetchData from '../../movies-api';
 import css from './MovieDetailsPage.module.css';
 
@@ -19,7 +20,9 @@ export default function MovieDetailsPage() {
       try {
         const data = await fetchData(`movie/${movieId}?language=en-US`);
         setMovie(data);
-      } catch (error) {}
+      } catch {
+        toast.error('Something went wrong! Please reload the page!');
+      }
     }
     getData();
   }, [movieId]);

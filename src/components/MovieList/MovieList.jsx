@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import css from './MovieList.module.css';
 
-export default function MovieList({ movies }) {
+export default function MovieList({ movies = [] }) {
   const location = useLocation();
 
   return (

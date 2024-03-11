@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import fetchData from '../../movies-api';
 import MovieList from '../../components/MovieList/MovieList';
 import css from './HomePage.module.css';
@@ -13,7 +14,9 @@ export default function HomePage() {
       try {
         const data = await fetchData('trending/movie/day?language=en-US');
         setMovies(data.results);
-      } catch (error) {}
+      } catch {
+        toast.error('Something went wrong! Please reload the page!');
+      }
     }
     getData();
   }, [setMovies]);

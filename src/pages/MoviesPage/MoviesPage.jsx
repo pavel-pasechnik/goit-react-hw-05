@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
+import toast from 'react-hot-toast';
 import fetchData from '../../movies-api';
 import MovieList from '../../components/MovieList/MovieList';
 import css from './MoviesPage.module.css';
@@ -15,21 +16,34 @@ export default function MoviesPage() {
 
   useEffect(() => {
     setQuery(value);
+
+    if (query === '' || value === '') {
+      setMovies([]);
+      return;
+    }
+
     async function getData() {
       try {
-        !params.size === 0 && setQuery(params.get('query'));
         const data = await fetchData(
           `search/movie?query=${query}&include_adult=false&language=en-US`
         );
 
+        data.total_results === 0 &&
+          toast('No pictures for your request', {
+            icon: '❗️',
+          });
+
         setMovies(data.results);
-      } catch (error) {}
+      } catch {
+        toast.error('Something went wrong! Please reload the page!');
+      }
     }
     getData();
-  }, [setQuery, setMovies, query, params]);
+  }, [setQuery, setMovies, query, value]);
 
   const handleSubmit = (values, actions) => {
     if (values.query === '') {
+      toast.error('Please enter a search term');
       setMovies([]);
       return;
     }

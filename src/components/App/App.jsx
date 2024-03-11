@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import Navigation from '../Navigation/Navigation.jsx';
 import NotFound from '../../pages/NotFound/NotFound.jsx';
 
@@ -14,6 +15,7 @@ import css from './App.module.css';
 export default function App() {
   return (
     <>
+      <Toaster position='top-right' />
       <Navigation />
 
       <Suspense fallback={<div>LOADING PAGE...</div>}>
